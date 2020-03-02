@@ -1,7 +1,6 @@
 import React from 'react';
 import Axios from 'axios'
 import SearchForm from './SearchForm'
-import Error from './Error'
 import WeatherReport from './WeatherReport'
 
 class SearchCity extends React.Component {
@@ -10,6 +9,7 @@ class SearchCity extends React.Component {
 		super(props)
 
 		this.state = {
+			error: 'Thhis is not the city you are looking for',
 			search: '',
 			temperature: undefined,
 			humidity: undefined,
@@ -20,8 +20,6 @@ class SearchCity extends React.Component {
 		}
 		
 	}
-
-
 
 	getData = async () => {
 		await Axios(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.search}&units=metric&appid=a9f6719e37f20890ebff5d91724dec1f`)
@@ -36,6 +34,8 @@ class SearchCity extends React.Component {
 				icon: info.weather[0].icon
 			})
 			console.log('this is the data', info)
+		}).catch(err => {
+			this.setState({error: err})
 		})
 	}
 
@@ -67,11 +67,12 @@ class SearchCity extends React.Component {
 				icon={this.state.icon}
 				/> 
 				: 
-				<h2 style={{
+				(<h2 style={{
 				 textAlign: 'center',
 				 padding: '1rem',
-				 marginTop: '1.2rem'}}>Search for a city</h2>
+				 marginTop: '1.2rem'}}>Search for a city</h2>)
 				}
+				
 				
 			</div>
 		)

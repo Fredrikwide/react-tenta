@@ -2,9 +2,13 @@ import React from 'react'
 
 const SearchForm = (props)  => {
     return (
-        <form onSubmit={props.onSubmit}>
+        <form onSubmit={props.onSubmit} style={{marginBottom: '2rem'}}>
             <div className="input-group">
-                <input type="text" className="form-control form-control-lg" id="city" onChange={props.handleChange} />
+                <input type="text" 
+                className="form-control form-control-lg" 
+                id="city" 
+                onChange={props.handleChange}
+                 />
 
                 <div className="input-group-append">
                     <button className="btn btn-success btn-lg" onClick={props.onSubmit}>Search</button>
